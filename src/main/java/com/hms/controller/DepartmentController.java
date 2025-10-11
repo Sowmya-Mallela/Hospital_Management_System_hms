@@ -28,19 +28,30 @@ public class DepartmentController {
         return ResponseEntity.ok(departmentService.getAllDepartments());
     }
 
-    @GetMapping("/{deptid}")
+//    @GetMapping("/{deptid}")
+//    public ResponseEntity<Department> getDepartmentById(@PathVariable Integer deptid) {
+//        return departmentService.getDepartmentById(deptid)
+//                .map(ResponseEntity::ok)
+//                .orElse(ResponseEntity.notFound().build());
+//    }
+    @GetMapping("/id/{deptid}")
     public ResponseEntity<Department> getDepartmentById(@PathVariable Integer deptid) {
         return departmentService.getDepartmentById(deptid)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @GetMapping("/head/{deptid}")
-    public ResponseEntity<Physician> getHeadOfDepartment(@PathVariable Integer deptid) {
-        return departmentService.getHeadOfDepartment(deptid)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    @GetMapping("/headid/{head}")
+    public ResponseEntity<List<Department>> getDepartmentsByHeadId(@PathVariable Integer head) {
+        return ResponseEntity.ok(departmentService.getDepartmentsByHeadId(head));
     }
+
+//    @GetMapping("/head/{deptid}")
+//    public ResponseEntity<Physician> getHeadOfDepartment(@PathVariable Integer deptid) {
+//        return departmentService.getHeadOfDepartment(deptid)
+//                .map(ResponseEntity::ok)
+//                .orElse(ResponseEntity.notFound().build());
+//    }
 
     @GetMapping("/headcertification/{deptid}")
     public ResponseEntity<List<TrainedIn>> getHeadCertifications(@PathVariable Integer deptid) {
